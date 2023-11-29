@@ -2,16 +2,17 @@
 
 ## Basic Usage {#basic-usage}
 
-The `setup()` hook serves as the entry point for Composition API usage in components in the following cases:
+هوک `setup()` به عنوان نقطه آغازینی برای استفاده از Composition API در کامپوننت‌ها عمل می‌کند که در موارد زیر مورد استفاده قرار می‌گیرد:
 
-1. Using Composition API without a build step;
-2. Integrating with Composition-API-based code in an Options API component.
+1.  استفاده از Composition API بدون مرحله ساخت؛
+2.  ادغام با کد مبتنی بر Composition-API در یک کامپوننت Options API.
 
-:::info Note
-If you are using Composition API with Single-File Components, [`<script setup>`](/api/sfc-script-setup) is strongly recommended for a more succinct and ergonomic syntax.
+:::info توجه
+اگر از Composition API همراه با کامپوننت‌های تک‌فایل (`*.vue`)، استفاده می‌کنید، استفاده از [`<script setup>`](/api/sfc-script-setup) برای کوتاه شدن کد و راحتی بیشتر توصیه می‌شود. 
 :::
 
 We can declare reactive state using [Reactivity APIs](./reactivity-core) and expose them to the template by returning an object from `setup()`. The properties on the returned object will also be made available on the component instance (if other options are used):
+ما می توانیم وضعیت واکنشی را با استفاده از [Reactivity APIs](./reactivity-core) اعلام کنیم و با برگرداندن یک شی از setup() آنها را در معرض تمپلیت قرار دهیم. خواص روی شی برگردانده شده نیز در محیط کامپوننت (اگر از گزینه های دیگر استفاده شود) در دسترس خواهند بود:
 
 ```vue
 <script>
