@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Vazirmatn:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;900&display=swap');
 
 /* RTL & Persian Styles */
 
@@ -68,4 +68,23 @@ li {
 .outline-marker {
   left: auto !important;
   right: -12px;
+}
+
+.vt-doc ol > li {
+  padding-left: unset !important;
+  padding-right: 1.5rem !important;
+  text-align: right;
+}
+
+.vt-doc ol > li::before {
+  left: unset !important;
+  right: 2px !important;
+}
+
+.vt-menu-link {
+  direction: rtl;
+}
+
+.join-translations {
+  direction: rtl;
 }

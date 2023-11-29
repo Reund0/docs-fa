@@ -37,7 +37,7 @@ const nav: ThemeConfig['nav'] = [
     link: 'https://play.vuejs.org'
   },
   {
-    text: 'زیست‌بوم',
+    text: 'اکوسیستم',
     activeMatch: `^/ecosystem/`,
     items: [
       {
@@ -106,11 +106,11 @@ const nav: ThemeConfig['nav'] = [
     text: 'درباره',
     activeMatch: `^/about/`,
     items: [
-      { text: 'سوالات متدوال', link: '/about/faq' },
+      { text: 'سوالات متداول', link: '/about/faq' },
       { text: 'تیم', link: '/about/team' },
       { text: 'انتشارات', link: '/about/releases' },
       {
-        text: 'راهنمای جامعه',
+        text: 'راهنمای کامیونیتی',
         link: '/about/community-guide'
       },
       { text: 'کدرفتار', link: '/about/coc' },
@@ -136,7 +136,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: 'آغاز',
       items: [
-        { text: 'مقدمه', link: '/guide/introduction' },
+        { text: 'معرفی', link: '/guide/introduction' },
         {
           text: 'شروع سریع',
           link: '/guide/quick-start'
@@ -151,15 +151,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/application'
         },
         {
-          text: 'ترکیب قالب (Template Syntax)',
+          text: 'Template Syntax',
           link: '/guide/essentials/template-syntax'
         },
         {
-          text: 'مبانی واکنش‌گرایی (Reactivity)',
+          text: 'مبانی Reactivity',
           link: '/guide/essentials/reactivity-fundamentals'
         },
         {
-          text: 'ویژگی‌های کامپیوتد (Computed)',
+          text: 'ویژگی‌های Computed',
           link: '/guide/essentials/computed'
         },
         {
@@ -167,11 +167,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/class-and-style'
         },
         {
-          text: 'اجرای شرطی (Conditional Rendering)',
+          text: 'رندر شرطی (Conditional Rendering)',
           link: '/guide/essentials/conditional'
         },
         {
-          text: 'اجرای لیست‌ها (List Rendering)',
+          text: 'رندر لیست‌ (List Rendering)',
           link: '/guide/essentials/list'
         },
         {
@@ -183,12 +183,12 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/forms'
         },
         {
-          text: 'چرخه‌حیات قلاب‌ها (Lifecycle Hooks)',
+          text: 'Lifecycle Hooks',
           link: '/guide/essentials/lifecycle'
         },
         { text: 'ناظرها (Watchers)', link: '/guide/essentials/watchers' },
         {
-          text: 'مرجع قالب‌ها (Template Refs)',
+          text: 'Template Refs',
           link: '/guide/essentials/template-refs'
         },
         {
@@ -205,7 +205,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/components/registration'
         },
         { text: 'Props', link: '/guide/components/props' },
-        { text: 'Events', link: '/guide/components/events' },
+        { text: 'رویداد های کامپوننت (Events)', link: '/guide/components/events' },
         { text: 'v-model', link: '/guide/components/v-model' },
         {
           text: 'Fallthrough Attributes',
@@ -217,7 +217,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/components/provide-inject'
         },
         {
-          text: 'Async Components',
+          text: 'کامپوننت‌های غیرهمگام (Async Components)',
           link: '/guide/components/async'
         }
       ]
@@ -230,7 +230,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/reusability/composables'
         },
         {
-          text: 'Custom Directives',
+          text: 'دایرکتیوهای شخصی سازی شده (Custom Directives)',
           link: '/guide/reusability/custom-directives'
         },
         { text: 'افزونه‌ها', link: '/guide/reusability/plugins' }
@@ -241,27 +241,27 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'Transition', link: '/guide/built-ins/transition' },
         {
-          text: 'TransitionGroup',
+          text: 'انتقال گروهی (TransitionGroup)',
           link: '/guide/built-ins/transition-group'
         },
         { text: 'KeepAlive', link: '/guide/built-ins/keep-alive' },
-        { text: 'Teleport', link: '/guide/built-ins/teleport' },
-        { text: 'Suspense', link: '/guide/built-ins/suspense' }
+        { text: 'تلپورت (Teleport)', link: '/guide/built-ins/teleport' },
+        { text: 'تعلیق (Suspense)', link: '/guide/built-ins/suspense' }
       ]
     },
     {
-      text: 'مقیاس‌بندی به بالا',
+      text: 'Scaling Up',
       items: [
-        { text: 'Single-File Components', link: '/guide/scaling-up/sfc' },
-        { text: 'Tooling', link: '/guide/scaling-up/tooling' },
-        { text: 'Routing', link: '/guide/scaling-up/routing' },
+        { text: 'کامپوننت های تک فایلی (Single-File Components)', link: '/guide/scaling-up/sfc' },
+        { text: 'ابزارها (Tooling)', link: '/guide/scaling-up/tooling' },
+        { text: 'مسیریابی (Routing)', link: '/guide/scaling-up/routing' },
         {
           text: 'State Management',
           link: '/guide/scaling-up/state-management'
         },
         { text: 'Testing', link: '/guide/scaling-up/testing' },
         {
-          text: 'Server-Side Rendering (SSR)',
+          text: 'رندرینگ سمت سرور (Server-Side Rendering (SSR))',
           link: '/guide/scaling-up/ssr'
         }
       ]
@@ -274,7 +274,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/best-practices/production-deployment'
         },
         {
-          text: 'کارایی',
+          text: 'کارایی (Performance)',
           link: '/guide/best-practices/performance'
         },
         {
@@ -309,7 +309,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/extras/ways-of-using-vue'
         },
         {
-          text: 'Composition API پرسش و پاسخ ',
+          text: 'سوالات متداول در مورد Composition API',
           link: '/guide/extras/composition-api-faq'
         },
         {
@@ -671,8 +671,13 @@ export default defineConfigWithTheme<ThemeConfig>({
         repo: 'https://github.com/vuejs-translations/docs-bn'
       },
       {
+        link: 'https://it.vuejs.org',
+        text: 'Italiano',
+        repo: 'https://github.com/vuejs-translations/docs-it'
+      },
+      {
         link: '/translations/',
-        text: 'Help Us Translate!',
+        text: 'به ما در ترجمه کمک کنید!',
         isTranslationsDesc: true
       }
     ],

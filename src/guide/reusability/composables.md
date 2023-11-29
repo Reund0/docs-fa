@@ -1,25 +1,25 @@
-# Composables {#composables}
+# ترکیب‌پذیرها {#composables}
 
 <script setup>
 import { useMouse } from './mouse'
 const { x, y } = useMouse()
 </script>
 
-:::tip
-This section assumes basic knowledge of Composition API. If you have been learning Vue with Options API only, you can set the API Preference to Composition API (using the toggle at the top of the left sidebar) and re-read the [Reactivity Fundamentals](/guide/essentials/reactivity-fundamentals) and [Lifecycle Hooks](/guide/essentials/lifecycle) chapters.
+:::tip نکته
+این بخش به دانش پایه‌ای در مورد Composition API نیاز دارد. اگر تاکنون فقط با Options API آشنا شده‌اید، می‌توانید اولویت API را به Composition API تغییر دهید (با استفاده از تاگل در بالای نوار کناری سمت چپ) و فصل‌های [مبانی واکنش‌گرایی](/guide/essentials/reactivity-fundamentals) و [قلاب‌های چرخه حیات](/guide/essentials/lifecycle) را مجدداً مطالعه کنید.
 :::
 
-## What is a "Composable"? {#what-is-a-composable}
+## یک "ترکیب پذیر" چیست؟ {#what-is-a-composable}
 
-In the context of Vue applications, a "composable" is a function that leverages Vue's Composition API to encapsulate and reuse **stateful logic**.
+در برنامه‌های Vue، یک "ترکیب‌پذیر" تابعی است که از Composition API استفاده می‌کند تا منطق **دارای حالت** را کپسوله‌سازی و قابل استفاده مجدد کند.
 
-When building frontend applications, we often need to reuse logic for common tasks. For example, we may need to format dates in many places, so we extract a reusable function for that. This formatter function encapsulates **stateless logic**: it takes some input and immediately returns expected output. There are many libraries out there for reusing stateless logic - for example [lodash](https://lodash.com/) and [date-fns](https://date-fns.org/), which you may have heard of.
+هنگام ساخت برنامه‌های فرانت‌اند، اغلب به استفاده مجدد از منطق برای انجام وظایف مشترک نیاز داریم. به عنوان مثال، ممکن است بخواهیم تاریخ‌ها را در بسیاری از نقاط فرمت کنیم، بنابراین یک تابع قابل استفاده مجدد برای این کار استخراج می‌کنیم. این تابع فرمت‌کننده منطق بدون حالت را کپسوله می‌کند: ورودی‌هایی را دریافت می‌کند و بلافاصله خروجی مورد انتظار را برمی‌گرداند. کتابخانه‌های زیادی برای استفاده مجدد از منطق بدون حالت وجود دارند - به عنوان مثال lodash و date-fns که ممکن است شما از آن‌ها شنیده باشید.
 
-By contrast, stateful logic involves managing state that changes over time. A simple example would be tracking the current position of the mouse on a page. In real-world scenarios, it could also be more complex logic such as touch gestures or connection status to a database.
+در مقابل، منطق دارای حالت شامل مدیریت حالت‌هایی است که با گذر زمان تغییر می‌کنند. یک مثال ساده ردیابی موقعیت فعلی ماوس در یک صفحه است. در سناریوهای واقعی‌تر، می‌تواند منطق پیچیده‌تری مانند حرکات لمسی یا وضعیت اتصال به یک پایگاه داده باشد.
 
-## Mouse Tracker Example {#mouse-tracker-example}
+## مثال ردیاب ماوس {#mouse-tracker-example}
 
-If we were to implement the mouse tracking functionality using the Composition API directly inside a component, it would look like this:
+اگر بخواهیم عملکرد ردیابی ماوس را با استفاده از Composition API مستقیماً در داخل یک کامپوننت پیاده سازی کنیم، به شکل زیر خواهد بود:
 
 ```vue
 <script setup>
@@ -40,7 +40,7 @@ onUnmounted(() => window.removeEventListener('mousemove', update))
 <template>Mouse position is at: {{ x }}, {{ y }}</template>
 ```
 
-But what if we want to reuse the same logic in multiple components? We can extract the logic into an external file, as a composable function:
+اما اگر بخواهیم از یک منطق در چندین کامپوننت دوباره استفاده کنیم، چه؟ ما می توانیم منطق را به عنوان یک تابع ترکیبی در یک فایل خارجی استخراج کنیم:
 
 ```js
 // mouse.js
@@ -68,7 +68,7 @@ export function useMouse() {
 }
 ```
 
-And this is how it can be used in components:
+و به این صورت می توان از آن در کامپوننت ها استفاده کرد:
 
 ```vue
 <script setup>
@@ -86,11 +86,11 @@ const { x, y } = useMouse()
 
 [Try it in the Playground](https://play.vuejs.org/#eNqNkj1rwzAQhv/KocUOGKVzSAIdurVjoQUvJj4XlfgkJNmxMfrvPcmJkkKHLrbu69H7SlrEszFyHFDsxN6drDIeHPrBHGtSvdHWwwKDwzfNHwjQWd1DIbd9jOW3K2qq6aTJxb6pgpl7Dnmg3NS0365YBnLgsTfnxiNHACvUaKe80gTKQeN3sDAIQqjignEhIvKYqMRta1acFVrsKtDEQPLYxuU7cV8Msmg2mdTilIa6gU5p27tYWKKq1c3ENphaPrGFW25+yMXsHWFaFlfiiOSvFIBJjs15QJ5JeWmaL/xYS/Mfpc9YYrPxl52ULOpwhIuiVl9k07Yvsf9VOY+EtizSWfR6xKK6itgkvQ/+fyNs6v4XJXIsPwVL+WprCiL8AEUxw5s=)
 
-As we can see, the core logic remains identical - all we had to do was move it into an external function and return the state that should be exposed. Just like inside a component, you can use the full range of [Composition API functions](/api/#composition-api) in composables. The same `useMouse()` functionality can now be used in any component.
+همانطور که می‌بینید، منطق اصلی یکسان باقی مانده است - تنها کاری که باید انجام می‌دادیم این بود که آن را در یک تابع خارجی جابجا کنیم و حالت‌هایی که باید نشان داده شوند را برگردانیم. درست مثل داخل یک کامپوننت، می‌توانید از تمام API‌های [Composition](/api/#composition-api) در ترکیب‌پذیرها استفاده کنید. همان `useMouse()` می‌تواند حالا در هر کامپوننتی استفاده شود.
 
-The cooler part about composables though, is that you can also nest them: one composable function can call one or more other composable functions. This enables us to compose complex logic using small, isolated units, similar to how we compose an entire application using components. In fact, this is why we decided to call the collection of APIs that make this pattern possible Composition API.
+قسمت جالب ترکیب‌پذیرها این است که می‌توانید آن‌ها را درون هم قرار دهید: یک تابع ترکیب‌پذیر می‌تواند یک یا چند تابع ترکیب‌پذیر دیگر را صدا بزند. این امکان به ما می‌دهد تا منطق پیچیده را با استفاده از واحدهای کوچک و مجزا ترکیب کنیم، شبیه به چگونگی ترکیب یک برنامه کامل با استفاده از کامپوننت‌ها. در واقع، همین دلیلی بود که تصمیم گرفتیم مجموعه API‌هایی که این الگو را ممکن می‌سازند را Composition API بنامیم.
 
-For example, we can extract the logic of adding and removing a DOM event listener into its own composable:
+به عنوان مثال، می‌توانیم منطق افزودن و حذف یک شنونده رویداد DOM را در composable خودش استخراج کنیم:
 
 ```js
 // event.js
@@ -104,7 +104,7 @@ export function useEventListener(target, event, callback) {
 }
 ```
 
-And now our `useMouse()` composable can be simplified to:
+و حالا useMouse() ترکیب‌پذیر ما می‌تواند ساده‌تر شود:
 
 ```js{3,9-12}
 // mouse.js
@@ -124,13 +124,13 @@ export function useMouse() {
 }
 ```
 
-:::tip
-Each component instance calling `useMouse()` will create its own copies of `x` and `y` state so they won't interfere with one another. If you want to manage shared state between components, read the [State Management](/guide/scaling-up/state-management) chapter.
+:::tip نکته
+هر مثال کامپوننت که `useMouse()` را صدا می‌زند، کپی‌های خود را از حالت‌های `x` و `y` ایجاد می‌کند تا با یکدیگر تداخل پیدا نکنند. اگر می‌خواهید حالت مشترک بین کامپوننت‌ها را مدیریت کنید، فصل [مدیریت حالت](/guide/scaling-up/state-management) را بخوانید.
 :::
 
-## Async State Example {#async-state-example}
+## مثال حالت Async {#async-state-example}
 
-The `useMouse()` composable doesn't take any arguments, so let's take a look at another example that makes use of one. When doing async data fetching, we often need to handle different states: loading, success, and error:
+ترکیب‌پذیر `useMouse()` هیچ آرگومانی نمی‌پذیرد، پس یک مثال دیگر را که از یک آرگومان استفاده می‌کند بررسی کنیم. هنگام دریافت داده‌های Async اغلب باید حالت‌های مختلف را مدیریت کنیم: بارگذاری، موفقیت و خطا:
 
 ```vue
 <script setup>
@@ -155,7 +155,7 @@ fetch('...')
 </template>
 ```
 
-It would be tedious to have to repeat this pattern in every component that needs to fetch data. Let's extract it into a composable:
+تکرار این الگو در هر کامپوننتی که نیاز به دریافت داده دارد، خسته‌کننده خواهد بود. بیایید آن را در یک ترکیب‌پذیر استخراج کنیم:
 
 ```js
 // fetch.js
@@ -174,7 +174,7 @@ export function useFetch(url) {
 }
 ```
 
-Now in our component we can just do:
+حالا در کامپوننت ما می‌توانیم فقط این کار را انجام دهیم:
 
 ```vue
 <script setup>
@@ -216,16 +216,19 @@ export function useFetch(url) {
   const data = ref(null)
   const error = ref(null)
 
-	const fetchData = (dt) => {
-			fetch(toValue(url))
+  const fetchData = () => {
+    // reset state before fetching..
+    data.value = null
+    error.value = null
+
+    fetch(toValue(url))
       .then((res) => res.json())
       .then((json) => (data.value = json))
       .catch((err) => (error.value = err))
-	}
+  }
 
   watchEffect(() => {
-    // reset state before fetching..
-    fetchData(url)
+    fetchData()
   })
 
   return { data, error }
@@ -238,7 +241,7 @@ Notice that `toValue(url)` is called **inside** the `watchEffect` callback. This
 
 This version of `useFetch()` now accepts static URL strings, refs, and getters, making it much more flexible. The watch effect will run immediately, and will track any dependencies accessed during `toValue(url)`. If no dependencies are tracked (e.g. url is already a string), the effect runs only once; otherwise, it will re-run whenever a tracked dependency changes.
 
-Here's [the updated version of `useFetch()`](https://play.vuejs.org/#eNptVMFu2zAM/RXOFztYZncodgmSYAPWnTZsKLadfFFsulHrSIZEJwuC/PtIyXaTtkALxxT5yPf45FPypevyfY/JIln6yumOwCP13bo0etdZR3ACh80cKrvresIaztA4u4OUi9KLpN7jN6RqO53nxRjKHz1nlqayxhNslMc/roUVpFuizi+K4tFb07Wqwq1ta3Q5HTtd2RpzblqQra0vGCCW65oreaIs/ZjOxmAf8MYRs2wGq/XU6D3X5HvV9sj5Y8UJakVqDuicdXMGJHfk0VcTj4wxOX9ZRFVYD34h3PGchPwG8N2qGjobZlpIYLnpiayB/YfGulWZaNAGPpUJfK5aXT1JRIbXZbI+nUDD+bwsYklAL2lZ6z1X64ZTw2CcKcAM3a1/2s6/gzsJAzKL3hA6rBfAWCE536H36gEDriwwFA4zTSMEpox7L8+L/pxacPv4K86Brcc4jGjFNV/5AS3TlrbLzqHwkLPYkt/fxFiLUto85Hk+ni+LScpknlwYhX147buD4oO7psGK5kD2r+zxhQdLg/9CSdObijSzvVoinGSeuPYwbPSP6VtZ8HgSJHx5JP8XA2TKH00F0V4BFaAouISvDHhiNrBB3j1CI90D5ZglfaMHuYXAx3Dc2+v4JbRt9wi0xWDymCpTbJ01tvftEbwFTakHcqp64guqPKgJoMYOTc1+OcLmeMUlEBzZM3ZUdjVqPPj/eRq5IAPngKwc6UZXWrXcpFVH4GmVqXkt0boiHwGog9IEpHdo+6GphBmgN6L1DA66beUC9s4EnhwdeOomMlMSkwsytLac5g7aR11ibkDZSLUABRk+aD8QoMiS1WSCcaKwISEZ2MqXIaBfLSpmchUb05pRsTNUIiNkOFjr9SZxyJTHOXx1YGR49eGRDP4rzRt6lmay86Re7DcgGTzAL74GrEOWDUaRL9kjb/fSoWzO3wPAlXNB9M1+KNrmcXF8uoab/PaCljQLwCN5oS93+jpFWmYyT/g8Zel9NEJ4S2fPpYMsc7i9uQlREeecnP8DWEwr0Q==), with an artificial delay and randomized error for demo purposes.
+Here's [the updated version of `useFetch()`](https://play.vuejs.org/#eNp9Vdtu40YM/RVWL1ZQr5RF0JfAMXpLgRZtd5Fu90kvY4mKJ5FnhLnYMQz/+5IcSZF3g30IbPNyyHPIYU7ZL31f7CNmt9nK1073ATyG2K8ro3e9dQFO4LBdQm13fQzYwBlaZ3ewoKTFLCh6/ANDvZ38RTmaiidPkZWprfEBNsrj/66DO1hsQ+j9bVk+eWv6TtW4tV2DrgjHXte2wYKKlsE21pcEkNJ1Q5nUUb54v7gajVHwxhbz/Aru1lOhHymn2KsuIsWPGSdoVFBLQOeso57vJgI5gc0CHQZ3JHfCPFUGJjimQH1dGt6T5VyZVZnUJB3pR8Ad8QtIvwD+tqqB3gqXWzasNjEEa2D/rrXurso0aAM/VRn8XHe6fmYLk9ZVtj6dQMP5vCpTiqBXYdXoPWXrlkKFEEUyMEH36w+29z/AvfBEIhVNQIfNLRCWBBc79F49ouDy4CVx6GlqQXQg3Af+nNWn0JLKp2+pD+w8pmZYY8r5nT6gI9pcdtU7ZB7sSyXp95sYa1ZKm8eiKEb/qpykzJbZbMFofy/39aDIcd+2WIclBPtZ5nO5u5XBF0lpo6mDJrYXO5CGnbZAmk17Z2LH+zF60gJ95eK/WQO58kdTz1cIoCwphZ4a+EBsYIM0e4SWqwvlFMV1p91i+GROc/vWPoe23R4hbFEeRwrlLrbOGht9dwRvQYeFh+BU/UwPW3lQE0CDPZqG9uUIm+MFFyE4sifspOzdqPHwfF674eczcBZk5YJuda1VR0U6dQTqVpmGxpJWl+ULAOqgdICgd2jjUJTNBBANa30FB911/DyjM8KTrANP3SZmim38QIbSlsLcQfukS4oVlA1nM5DI8E77gUAYb4AngqkjmRCTFLZ8KAT9YlApkrJoMa0ZFTtDzTJCjsNqfTtJHCL54yxHCEaGXx0sOTKVeUPPykzrPKmX6g1IBg/wkZ4B6ZDnw6IsyflE051vKC3npwHgYnPp3rWQ/6PCtkiDI+8aroubGS0uJsAjeabPb/oyhEvm3I+cp3zxkBZBfi2uXlMHWZZwc30tVhbnTBcgeJpQqx9FaLoBgl5l/J9Ad+g+9KyDrzK6dsNIM9V19vCX2IKLuBzt9Rbr5zfsT/6FbVX2kd+r22OVTb6g3COG5L7/7198oe+Tc2eb2FH0d5wPLFLkHlPYr9E01PYsTrr9Uy4bnYVP/v4loPEjKW5U5JD4KqO79tt3qL+2e1PcSB6reP4CbzCltA==), with an artificial delay and randomized error for demo purposes.
 
 ## Conventions and Best Practices {#conventions-and-best-practices}
 
