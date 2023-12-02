@@ -17,13 +17,13 @@ A function that returns the initial reactive state for the component instance.
 
 - **Details**
 
-  The function is expected to return a plain JavaScript object, which will be made reactive by Vue. After the instance is created, the reactive data object can be accessed as `this.$data`. The component instance also proxies all the properties found on the data object, so `this.a` will be equivalent to `this.$data.a`.
+از تابع انتظار می رود یک شی ساده جاوااسکریپت برگرداند که توسط Vue واکنش‌پذیر می‌شود. پس از ایجاد نمونه، می‌توان به شی داده‌های واکنش‌پذیر به عنوان `this.$data` دسترسی پیدا کرد. نمونه کامپوننت همچنین همه خصوصیات یافت شده در شی داده‌ها را واسطه‌گری می‌کند، به طوری که `this.a` معادل `this.$data.a` خواهد بود.
 
-  All top-level data properties must be included in the returned data object. Adding new properties to `this.$data` is possible, but it is **not** recommended. If the desired value of a property is not yet available then an empty value such as `undefined` or `null` should be included as a placeholder to ensure that Vue knows that the property exists.
+تمام خصوصیات داده‌های سطح بالا باید در شی داده‌های برگردانده شده شامل شوند. افزودن خصوصیات جدید به `this.$data` امکان‌پذیر است، اما **توصیه نمی‌شود**. اگر مقدار مورد نظر یک خاصیت هنوز در دسترس نیست، باید یک مقدار خالی مانند `undefined` یا `null` به عنوان جانگهدار شامل شود تا Vue بداند این خاصیت وجود دارد.
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `this.$data._property`.
+خصوصیاتی که با `_` یا `$` شروع می‌شوند **واسطه‌گری نخواهند شد** زیرا ممکن است با خصوصیات داخلی و روش‌های API  Vue تداخل داشته باشند. برای دسترسی به آن‌ها باید از `this.$data._property` استفاده کرد.
 
-  It is **not** recommended to return objects with their own stateful behavior like browser API objects and prototype properties. The returned object should ideally be a plain object that only represents the state of the component.
+**توصیه نمی‌شود** شی‌هایی با رفتار حالت‌دار خودشان مانند شی‌های API مرورگر و خصوصیات پروتوتایپ برگردانده شوند. شی برگردانده شده ایده‌آل‌تر است که یک شی ساده باشد که فقط حالت کامپوننت را نمایش می‌دهد.
 
 - **Example**
 
@@ -39,7 +39,7 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  توجه داشته باشید اگر از تابع پیکانی با پراپرتی `data` استفاده کنید، `this` اشاره به نمونه کامپوننت نخواهد داشت، اما همچنان می‌توانید به عنوان اولین آرگومان تابع به نمونه دسترسی داشته باشید:
 
   ```js
   data: (vm) => ({ a: vm.myProp })
@@ -49,7 +49,7 @@ A function that returns the initial reactive state for the component instance.
 
 ## props {#props}
 
-Declare the props of a component.
+پراپ‌های یک کامپوننت را تعریف می‌کند.
 
 - **Type**
 
@@ -74,30 +74,34 @@ Declare the props of a component.
   type PropType<T> = { new (): T } | { new (): T }[]
   ```
 
-  > Types are simplified for readability.
+  > نوع داد‌ها برای خوانایی بیشتر خلاصه شده‌اند.
 
 - **Details**
 
-  In Vue, all component props need to be explicitly declared. Component props can be declared in two forms:
+  در Vue، تمام propهای کامپوننت باید به طور صریح اعلام شوند. Propهای کامپوننت می‌توانند به دو شکل اعلام شوند:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the prop, and the value is the prop's type (a constructor function) or advanced options.
+  - شکل ساده با استفاده از آرایه‌ای از رشته
+  - شکل کامل با استفاده از یک شی که هر کلید خاصیت آن نام prop است، و مقدار آن نوع prop (تابع سازنده) یا گزینه‌های پیشرفته است.
 
-  With object-based syntax, each prop can further define the following options:
+با سینتکس مبتنی بر شی، هر prop می‌تواند گزینه‌های زیر را مشخص کند:
 
-  - **`type`**: Can be one of the following native constructors: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, any custom constructor function or an array of those. In development mode, Vue will check if a prop's value matches the declared type, and will throw a warning if it doesn't. See [Prop Validation](/guide/components/props#prop-validation) for more details.
+  - **`type`**:
+می‌تواند یکی از این نوع‌داده‌های بومی باشد: `String`، `Number`، `Boolean`، `Array`، `Object`، `Date`، `Function`، `Symbol` و یا هر تابع سازنده سفارشی یا آرایه‌ای از آن‌ها. در حالت  development، Vue بررسی می‌کند آیا مقدار یک prop با نوع اعلام شده مطابقت دارد یا خیر، و اگر مطابقت نداشته باشد هشداری را نمایش می‌دهد. برای جزئیات بیشتر به [Prop Validation](/guide/components/props#prop-validation) مراجعه کنید.
 
-    Also note that a prop with `Boolean` type affects its value casting behavior in both development and production. See [Boolean Casting](/guide/components/props#boolean-casting) for more details.
+    همچنین توجه داشته باشید که یک prop با نوع `Boolean` بر روی رفتار casting آن در هر دو حالت development و production تأثیر می‌گذارد. برای جزئیات بیشتر به [Boolean Casting](/guide/components/props#boolean-casting) مراجعه کنید.
 
-  - **`default`**: Specifies a default value for the prop when it is not passed by the parent or has `undefined` value. Object or array defaults must be returned using a factory function. The factory function also receives the raw props object as the argument.
+  - **`default`**:
+مقدار پیش‌فرضی برای prop را هنگامی که توسط والد پاس داده نشده یا مقدار `undefined` دارد، مشخص می‌کند. پیش‌فرض‌های شی یا آرایه باید با استفاده از تابع فکتوری برگردانده شوند. تابع فکتوری همچنین شی خام props را به عنوان آرگومان دریافت می‌کند.
 
-  - **`required`**: Defines if the prop is required. In a non-production environment, a console warning will be thrown if this value is truthy and the prop is not passed.
+  - **`required`**:
+تعریف می‌کند آیا prop الزامی است یا خیر. در محیط غیر تولیدی، اگر این مقدار درست باشد و prop پاس داده نشود، هشداری در کنسول نمایش داده خواهد شد.
 
-  - **`validator`**: Custom validator function that takes the prop value as the sole argument. In development mode, a console warning will be thrown if this function returns a falsy value (i.e. the validation fails).
+  - **`validator`**:
+تابع اعتبارسنجی سفارشی که تنها آرگومان آن مقدار prop است. در حالت development، اگر این تابع یک مقدار نادرست (یعنی اعتبارسنجی ناموفق باشد) برگرداند، هشداری در کنسول نمایش داده خواهد شد.
 
-- **Example**
+- **مثال**
 
-  Simple declaration:
+  تعریف ساده:
 
   ```js
   export default {
@@ -105,7 +109,7 @@ Declare the props of a component.
   }
   ```
 
-  Object declaration with validations:
+  تعریف شی با اعتبارسنجی:
 
   ```js
   export default {
@@ -158,7 +162,7 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Details**
+- **جزئیات**
 
   The option accepts an object where the key is the name of the computed property, and the value is either a computed getter, or an object with `get` and `set` methods (for writable computed properties).
 
